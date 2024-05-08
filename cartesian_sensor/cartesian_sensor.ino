@@ -6,11 +6,12 @@ void setup() {
 }
 
 void loop() {
-    int x = analogRead(pin_pot_x);
-    int y = analogRead(pin_pot_y);
-
-    Serial.println(x);
-    Serial.println(y);
-    Serial.println();
-    delay(100);
+    if (Serial.available() > 0) {
+      Serial.println(analogRead(pin_pot_x));
+      Serial.println(analogRead(pin_pot_y));
+      while (Serial.available() > 0) {
+        Serial.read();
+      }
+    }
+    delay(10);
 }
