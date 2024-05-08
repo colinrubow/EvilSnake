@@ -1,6 +1,5 @@
 import pygame
 import numpy as np
-import time
 from fruit import Fruit
 from avatar import Avatar
 from snake import Snake
@@ -18,6 +17,7 @@ score = 0
 fruit = Fruit(height, width)
 snakes = [Snake(height, width)]
 avatar = Avatar(height, width)
+color = pygame.Color(185, 121, 99, 255)
 
 while running:
     for event in pygame.event.get():
@@ -28,8 +28,11 @@ while running:
             # quit
             if event.key == pygame.K_q:
                 running = False
+            # like the color
+            if event.key == pygame.K_c:
+                print(color)
     
-    screen.fill('gray')
+    screen.fill(color)
 
     avatar.update_location()
     for snake in snakes:
@@ -46,7 +49,7 @@ while running:
         for loc in snake.locations:
             if np.linalg.norm(loc - avatar.location) <= 5:
                 running = False
-    if np.linalg.norm(avatar.location - fruit.location) <= 7:
+    if np.linalg.norm(avatar.location - fruit.location) <= 10:
         # update score and fruit location and snake length
         score += 1
         if score % 10 == 0:

@@ -2,7 +2,7 @@ import random
 import numpy as np
 
 class Fruit():
-    def __init__(self, height: int, width: int, color: str = 'green', radius: int = 7) -> None:
+    def __init__(self, height: int, width: int, color: str = 'green', radius: int = 10) -> None:
         self.color = color
         self.height = height
         self.width = width
