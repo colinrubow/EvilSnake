@@ -1,16 +1,21 @@
-from arduino import Arduino
 import numpy as np
 
 class Avatar():
     def __init__(self, height: int, width: int, color: str = 'blue', radius: int = 5) -> None:
-        self.ino = Arduino()
-        print('connected to ino')
         self.color = color
         self.height = height
         self.width = width
         self.location = np.array([width/2, height/2], int)
         self.radius = radius
     
-    def update_location(self) -> None:
-        x, y = self.ino.write_read()
-        self.location = np.array([((int(y)-8)/989)*self.width, (1 - (int(x)-9)/1006)*self.height], int)
+    def update_location(self, direction: int) -> None:
+        match direction:
+            case 0:
+                self.location = self.location + np.array([0, -1])
+            case 1:
+                self.location = self.location + np.array([1, 0])
+            case 2:
+                self.location = self.location + np.array([0, 1])
+            case 3:
+                self.location = self.location + np.array([-1, 0])
+        self.location = self.location%np.array([self.width, self.height])

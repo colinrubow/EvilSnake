@@ -18,6 +18,7 @@ fruit = Fruit(height, width)
 snakes = [Snake(height, width)]
 avatar = Avatar(height, width)
 color = pygame.Color(185, 121, 99, 255)
+pressed_keys = []
 
 while running:
     for event in pygame.event.get():
@@ -28,13 +29,38 @@ while running:
             # quit
             if event.key == pygame.K_q:
                 running = False
-            # like the color
-            if event.key == pygame.K_c:
-                print(color)
+            elif event.key == pygame.K_UP:
+                pressed_keys.append(pygame.K_UP)
+                avatar.update_location(0)
+            elif event.key == pygame.K_RIGHT:
+                pressed_keys.append(pygame.K_RIGHT)
+                avatar.update_location(1)
+            elif event.key == pygame.K_DOWN:
+                pressed_keys.append(pygame.K_DOWN)
+                avatar.update_location(2)
+            elif event.key == pygame.K_LEFT:
+                pressed_keys.append(pygame.K_LEFT)
+                avatar.update_location(3)
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_UP:
+                pressed_keys.remove(pygame.K_UP)
+            elif event.key == pygame.K_RIGHT:
+                pressed_keys.remove(pygame.K_RIGHT)
+            elif event.key ==  pygame.K_DOWN:
+                pressed_keys.remove(pygame.K_DOWN)
+            elif event.key == pygame.K_LEFT:
+                pressed_keys.remove(pygame.K_LEFT)
+    if pygame.K_UP in pressed_keys:
+        avatar.update_location(0)
+    if pygame.K_RIGHT in pressed_keys:
+        avatar.update_location(1)
+    if pygame.K_DOWN in pressed_keys:
+        avatar.update_location(2)
+    if pygame.K_LEFT in pressed_keys:
+        avatar.update_location(3)
     
     screen.fill(color)
 
-    avatar.update_location()
     for snake in snakes:
         snake.update_locations()
 

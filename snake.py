@@ -12,14 +12,17 @@ class Snake():
         self.direction = np.array([0, 1], int)
         self.directions = [np.array([0, 1], int), np.array([1, 1], int), np.array([1, 0], int), np.array([1, -1], int), np.array([0, -1], int), np.array([-1, -1], int), np.array([-1, 0], int), np.array([-1, 1], int)]
         self.speed = 2
+        self.slowdown_count = 0
     
     def update_locations(self) -> None:
-        self.i = self.i - 1
-        if self.i == 0:
-            self.i = random.randint(0, 200)
-            self.direction = random.choice(self.directions)
-        self.locations.append(np.array([(self.locations[-1][0] + self.direction[0]*self.speed)%self.width, (self.locations[-1][1] + self.direction[1]*self.speed)%self.height], int))
-        self.locations.pop(0)
+        if self.slowdown_count%3 == 0:
+            self.i = self.i - 1
+            if self.i == 0:
+                self.i = random.randint(1, 200)
+                self.direction = random.choice(self.directions)
+            self.locations.append(np.array([(self.locations[-1][0] + self.direction[0]*self.speed)%self.width, (self.locations[-1][1] + self.direction[1]*self.speed)%self.height], int))
+            self.locations.pop(0)
+        self.slowdown_count += 1
     
     def grow(self) -> None:
         for _ in range(int(0.1*self.locations.__len__())):
