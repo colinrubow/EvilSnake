@@ -1,10 +1,11 @@
-from arduino import Arduino
+from glasses import Glasses
 import numpy as np
 
 class Avatar():
     def __init__(self, height: int, width: int, color: str = 'blue', radius: int = 5) -> None:
-        self.ino = Arduino()
-        print('connected to ino')
+        self.glasses = Glasses()
+        self.glasses.initialize_connection()
+        print('connected to glasses')
         self.color = color
         self.height = height
         self.width = width
@@ -12,5 +13,5 @@ class Avatar():
         self.radius = radius
     
     def update_location(self) -> None:
-        x, y = self.ino.write_read()
-        self.location = np.array([((int(y)-8)/989)*self.width, (1 - (int(x)-9)/1006)*self.height], int)
+        x, y = self.glasses.get_packet()
+        self.location = np.array([int(x*self.width), int((1-y)*self.height)])
