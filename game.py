@@ -37,7 +37,6 @@ while running:
     avatar.update_location()
     for snake in snakes:
         snake.update_locations()
-
     pygame.draw.circle(screen, avatar.color, avatar.location, avatar.radius)
     for snake in snakes:
         for loc in snake.locations:
@@ -57,7 +56,6 @@ while running:
                 snake.grow()
         fruit.update_location()
         snakes.append(Snake(height, width))
-
     pygame.display.flip()
     
 print(score)

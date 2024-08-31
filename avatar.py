@@ -13,4 +13,4 @@ class Avatar():
     
     def update_location(self) -> None:
         x, y = self.ino.write_read()
-        self.location = np.array([((int(y)-8)/989)*self.width, (1 - (int(x)-9)/1006)*self.height], int)
+        self.location = np.array([((int(x)-8)/989)*self.width, (1 - (int(y)-9)/1006)*self.height], int)
