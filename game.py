@@ -29,26 +29,26 @@ while running:
             # quit
             if event.key == pygame.K_q:
                 running = False
-            elif event.key == pygame.K_UP:
+            elif event.key == pygame.K_UP or event.key == pygame.K_w:
                 pressed_keys.append(pygame.K_UP)
                 avatar.update_location(0)
-            elif event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                 pressed_keys.append(pygame.K_RIGHT)
                 avatar.update_location(1)
-            elif event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_DOWN or event.key == pygame.K_s:
                 pressed_keys.append(pygame.K_DOWN)
                 avatar.update_location(2)
-            elif event.key == pygame.K_LEFT:
+            elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
                 pressed_keys.append(pygame.K_LEFT)
                 avatar.update_location(3)
         elif event.type == pygame.KEYUP:
-            if event.key == pygame.K_UP:
+            if event.key == pygame.K_UP or event.key == pygame.K_w:
                 pressed_keys.remove(pygame.K_UP)
-            elif event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_RIGHT or event.key == pygame.K_d:
                 pressed_keys.remove(pygame.K_RIGHT)
-            elif event.key ==  pygame.K_DOWN:
+            elif event.key ==  pygame.K_DOWN or event.key == pygame.K_s:
                 pressed_keys.remove(pygame.K_DOWN)
-            elif event.key == pygame.K_LEFT:
+            elif event.key == pygame.K_LEFT or event.key == pygame.K_a:
                 pressed_keys.remove(pygame.K_LEFT)
     if pygame.K_UP in pressed_keys:
         avatar.update_location(0)
